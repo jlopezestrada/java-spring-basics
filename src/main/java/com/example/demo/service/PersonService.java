@@ -2,10 +2,14 @@ package com.example.demo.service;
 
 import com.example.demo.dao.PersonDao;
 import com.example.demo.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 /**
  * The PersonService class provides methods for managing Person objects using a PersonDao instance.
  */
+@Service
 public class PersonService {
 
     private final PersonDao personDao;
@@ -15,7 +19,8 @@ public class PersonService {
      *
      * @param personDao The PersonDao instance to use for managing Person objects.
      */
-    public PersonService(PersonDao personDao) {
+    @Autowired
+    public PersonService(@Qualifier("InitialDAO") PersonDao personDao) {
         this.personDao = personDao;
     }
 
