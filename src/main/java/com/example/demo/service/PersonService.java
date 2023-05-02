@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * The PersonService class provides methods for managing Person objects using a PersonDao instance.
  */
@@ -32,5 +34,9 @@ public class PersonService {
      */
     public int addPerson(Person person) {
         return personDao.insertPerson(person);
+    }
+
+    public List<Person> getAllPeople() {
+        return personDao.selectAllPeople();
     }
 }
