@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * PersonController class represents a controller for managing Person objects.
@@ -43,5 +44,10 @@ public class PersonController {
     @GetMapping
     public List<Person> getAllPeople() {
         return personService.getAllPeople();
+    }
+
+    @GetMapping(path = "/{id}")
+    public Person getPersonById(@PathVariable("id")UUID id) {
+        return personService.getPersonByID(id).orElse(null);
     }
 }
