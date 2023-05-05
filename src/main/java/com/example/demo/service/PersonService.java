@@ -38,11 +38,39 @@ public class PersonService {
         return personDao.insertPerson(person);
     }
 
+    /**
+     * Returns all Person objects from the database.
+     * @return a List of Person with all Person objects from the database.
+     */
     public List<Person> getAllPeople() {
         return personDao.selectAllPeople();
     }
 
+    /**
+     * Returns a Person object with a specified id from the database.
+     * @param id the id of the Person object.
+     * @return a Person with a specified id from the database.
+     */
     public Optional<Person> getPersonByID(UUID id) {
         return personDao.selectPersonById(id);
+    }
+
+    /**
+     * Deletes a Person object with a specified id from the database.
+     * @param id the id of the Person object to delete.
+     * @return 0 if the specified id is not found. 1 if the specified id is found and the Person object has been deleted.
+     */
+    public int deletePerson(UUID id) {
+        return personDao.deletePersonById(id);
+    }
+
+    /**
+     * Updates a Person object with a specified id from the database.
+     * @param id the id of the Person object to delete.
+     * @param person the updated Person object.
+     * @return 0 if the specified id is not found. 1 if the specified id is found and the Person object has been updated.
+     */
+    public int updatePerson(UUID id, Person person) {
+        return personDao.updatePersonById(id, person);
     }
 }

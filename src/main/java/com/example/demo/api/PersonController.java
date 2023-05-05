@@ -46,8 +46,32 @@ public class PersonController {
         return personService.getAllPeople();
     }
 
+    /**
+     * Return a Person object with a specified id from the database.
+     * @param id the id of the Person.
+     * @return Person object with a specified id.
+     */
     @GetMapping(path = "/{id}")
     public Person getPersonById(@PathVariable("id")UUID id) {
         return personService.getPersonByID(id).orElse(null);
+    }
+
+    /**
+     * Delete a Person object with a specified id from the database.
+     * @param id the id of the Person.
+     */
+    @DeleteMapping(path = "/{id}")
+    public void deletePersonById(@PathVariable("id") UUID id) {
+        personService.deletePerson(id);
+    }
+
+    /**
+     * Update a Person object with a specified id from the database.
+     * @param id the id of the Person.
+     * @param person the updated Person.
+     */
+    @PutMapping(path = "{id}")
+    public void updatePerson(@PathVariable("id") UUID id, @RequestBody Person person) {
+        personService.updatePerson(id, person);
     }
 }

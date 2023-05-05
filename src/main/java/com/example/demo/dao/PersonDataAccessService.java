@@ -26,24 +26,55 @@ public class PersonDataAccessService implements PersonDao {
         DB.add(new Person(id, person.getName()));
         return 1;
     }
-
+    /**
+     * Retrieves all Person objects in the database.
+     * @return a List of all Person objects in the database.
+     */
     @Override
     public List<Person> selectAllPeople() {
         return DB;
     }
 
+    /**
+     * Retrieves a Person object with a specified id.
+     * @param id the id of the Person object to retrieve.
+     * @return an Optional containing the Person object with the specified id, or empty if no Person object with the specified id is found.
+     */
     @Override
     public Optional<Person> selectPersonById(UUID id) {
         return DB.stream().filter(person -> person.getId().equals(id)).findFirst();
     }
 
+    /**
+     * Deletes Person object with specified id from the database.
+     * @param id the id of the Person to delete.
+     * @return 1 if a Person object with a certain id has been deleted. 0 if no person with specified id has been found.
+     */
     @Override
     public int deletePersonById(UUID id) {
-        return 0;
+        Optional<Person> delPerson = selectPersonById(id);
+        if (delPerson.isEmpty()) {
+            return 0;
+        }
+        DB.remove(delPerson.get());
+        return 1;
     }
 
+    /**
+     * Updates Person object with specified id in the database.
+     * @param id the id of the Person to update.
+     * @param person updated Person.
+     * @return 1 if a Person object with a certain id ahs been deleted. 0 if no person with specified id has been found.
+     */
     @Override
     public int updatePersonById(UUID id, Person person) {
-        return 0;
+        return selectPersonById(id).map(p -> {
+            int indexOfPersonToUpdate = DB.indexOf(p);
+            if (indexOfPersonToUpdate >= 0) {
+                DB.set(indexOfPersonToUpdate, new Person(id, person.getName()));
+                return 1;
+            }
+            return 0;
+        }).orElse(0);
     }
 }

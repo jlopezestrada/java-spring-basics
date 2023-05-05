@@ -29,11 +29,31 @@ public interface PersonDao {
         return insertPerson(id, person);
     }
 
+    /**
+     * Retrieves all Person objects in the database.
+     * @return a List of all Person objects in the database.
+     */
     List<Person> selectAllPeople();
 
+    /**
+     * Retrieves a Person object with a specified id.
+     * @param id the id of the Person object to retrieve.
+     * @return an Optional containing the Person object with the specified id, or empty if no Person object with the specified id is found.
+     */
     Optional<Person> selectPersonById(UUID id);
 
+    /**
+     * Deletes Person object with specified id from the database.
+     * @param id the id of the Person to delete.
+     * @return 1 if a Person object with a certain id has been deleted. 0 if no person with specified id has been found.
+     */
     int deletePersonById(UUID id);
 
+    /**
+     * Updates Person object with specified id in the database.
+     * @param id the id of the Person to update.
+     * @param person updated Person.
+     * @return 1 if a Person object with a certain id ahs been deleted. 0 if no person with specified id has been found.
+     */
     int updatePersonById(UUID id, Person person);
 }
