@@ -2,6 +2,9 @@ package com.example.demo.api;
 
 import com.example.demo.model.Person;
 import com.example.demo.service.PersonService;
+import io.micrometer.common.lang.NonNull;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +36,7 @@ public class PersonController {
      * @param person New Person to be created.
      */
     @PostMapping
-    public void addPerson(@RequestBody Person person) {
+    public void addPerson(@Valid @NonNull @RequestBody Person person) {
         personService.addPerson(person);
     }
 
@@ -71,7 +74,7 @@ public class PersonController {
      * @param person the updated Person.
      */
     @PutMapping(path = "{id}")
-    public void updatePerson(@PathVariable("id") UUID id, @RequestBody Person person) {
+    public void updatePerson(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody Person person) {
         personService.updatePerson(id, person);
     }
 }

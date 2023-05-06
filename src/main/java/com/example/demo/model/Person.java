@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ public class Person {
     private final UUID id;
 
     /** Name of the person. **/
+    @NotBlank
     private final String name;
 
     /**
